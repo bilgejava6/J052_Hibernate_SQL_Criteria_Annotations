@@ -16,4 +16,9 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    String comment;
+    Long date;
+    String imageUrl;
+    @ManyToOne
+    User user;
 }

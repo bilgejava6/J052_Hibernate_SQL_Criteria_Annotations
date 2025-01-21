@@ -92,9 +92,14 @@ public class User {
      */
     @ElementCollection
     /**
-     *
+     * oluşacak yeni tablonun özelleştirilmesi gerekiyor ise bunu
+     * @CollectionTable - oluşacak tabloyu düzenleyebiliriz.
      */
+    @CollectionTable(name = "tbl_user_hobi",
+            joinColumns = @JoinColumn(name = "user_id_olacak_tamam_mi"))
     List<String> hobiler;
 
+    @OneToMany
+    List<Post> postList;
 
 }

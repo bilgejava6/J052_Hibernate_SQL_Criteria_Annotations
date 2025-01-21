@@ -1,5 +1,6 @@
 package com.muhammet;
 
+import com.muhammet.entity.Post;
 import com.muhammet.entity.User;
 import com.muhammet.entity.enums.Gender;
 import jakarta.persistence.EntityManager;
@@ -28,6 +29,16 @@ public class Runner {
         em.getTransaction().begin();
         em.persist(user);
         em.getTransaction().commit();
+        Post post = Post.builder()
+                .comment("Bu gün java ile  hibernate annotations  öğrenildi.")
+                .date(5L)
+                .imageUrl("")
+                .user(user)
+                .build();
+        em.getTransaction().begin();
+        em.persist(post);
+        em.getTransaction().commit();
+
         em.close();
         emf.close();
 
