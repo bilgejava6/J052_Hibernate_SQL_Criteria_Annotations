@@ -1,0 +1,50 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+    <persistence-unit name="criteria_example">
+        <description>
+            Persistence unit for Hibernate User Guide
+        </description>
+
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+<!--    Kullanacağınız varlık (entity) sınıflarını burada belirtiyorsunuz.-->
+        <class>com.muhammet.entity.User</class>
+        <class>com.muhammet.entity.Comment</class>
+        <class>com.muhammet.entity.Follow</class>
+        <class>com.muhammet.entity.Post</class>
+
+
+        <properties>
+<!--        Hangi Database Driver ı nı Kullanacaksınızı.  Class.forName("org.postgresql.Driver")     -->
+            <property name="jakarta.persistence.jdbc.driver"
+                      value="org.postgresql.Driver" />
+<!--        Bağlantı için gerekli ayarlar -->
+            <property name="jakarta.persistence.jdbc.url"
+                      value="jdbc:postgresql://localhost:5435/criteriadb" />
+<!--        Yetkili kullanıcı adı -->
+            <property name="jakarta.persistence.jdbc.user"
+                      value="postgres" />
+<!--        Şifre -->
+            <property name="jakarta.persistence.jdbc.password"
+                      value="root" />
+<!--        Hibernate yazıdığı SQL komutlarını göstersin mi?-->
+            <property name="hibernate.show_sql"
+                      value="true" />
+<!--        Hibernate DB deki tabloları nasıl yönetsin karar veriyoruz.
+            create -> Eğer DB de tablolar yok ise oluştur ve her seferinde yeniden oluştur.
+            create-drop -> DB de tablo oluştur ve uygulamayı kapatınca(Connection close )
+                            tabloları sil.
+             update -> Eğer DB de tablolar var ise öylecek bırak. Eğer tablolar var ve değişiklik
+             olmuş ise uygula, Eğer DB de tabolar yok ise oluştur.
+-->
+            <property name="hibernate.hbm2ddl.auto"
+                      value="update" />
+        </properties>
+
+    </persistence-unit>
+
+
+</persistence>
