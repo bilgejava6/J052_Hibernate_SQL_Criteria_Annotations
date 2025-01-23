@@ -99,7 +99,26 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id_olacak_tamam_mi"))
     List<String> hobiler;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     List<Post> postList;
 
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("User{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", surname='").append(surname).append('\'');
+        sb.append(", userName='").append(userName).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", phone='").append(phone).append('\'');
+        sb.append(", bornDate=").append(bornDate);
+        sb.append(", gender=").append(gender);
+        sb.append(", baseEntity=").append(baseEntity);
+        sb.append(", nameAndSurname='").append(nameAndSurname).append('\'');
+        sb.append(", hobiler=").append(hobiler);
+        sb.append(", postList=").append(postList);
+        sb.append('}');
+        return sb.toString();
+    }
 }

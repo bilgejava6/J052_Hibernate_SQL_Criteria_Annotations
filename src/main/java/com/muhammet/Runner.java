@@ -26,9 +26,7 @@ public class Runner {
                 .password("123456")
                 .userName("muhammet.hoca")
                 .build();
-        em.getTransaction().begin();
-        em.persist(user);
-        em.getTransaction().commit();
+
         Post post = Post.builder()
                 .comment("Bu gün java ile  hibernate annotations  öğrenildi.")
                 .date(5L)
@@ -41,6 +39,13 @@ public class Runner {
 
         em.close();
         emf.close();
+
+        /**
+         * SQL - Criteria ile tüm verileri DB den çekmek.
+         * LazyLoad ->,
+         * EagerLoad ->
+         */
+
 
 
     }
