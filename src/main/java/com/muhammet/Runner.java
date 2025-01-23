@@ -6,6 +6,9 @@ import com.muhammet.entity.enums.Gender;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 
 import java.util.Date;
 import java.util.List;
@@ -37,16 +40,54 @@ public class Runner {
         em.persist(post);
         em.getTransaction().commit();
 
+        Post post1 = Post.builder()
+                .comment("hibernate  sorguları")
+                .date(10L)
+                .imageUrl("")
+                .user(user)
+                .build();
+        em.getTransaction().begin();
+        em.persist(post1);
+        em.getTransaction().commit();
+
         em.close();
-        emf.close();
+
 
         /**
          * SQL - Criteria ile tüm verileri DB den çekmek.
-         * LazyLoad ->,
-         * EagerLoad ->
+         * LazyLoad ->, geç bağlanma ve yükleme yapar. yani veriler çekilmez erişilmek istenildiğinde çekilir.
+         * select * from tbluser
+         * id
+         * name
+         * select * from tblpost where userid = ?
+         * postlist
+         *
+         * EagerLoad -> veriler ilk sorguda çekilir.
+         * Select * from tbluser
+         * select * from tblpost where userid = ?
+         * id
+         * name
+         * postlist
          */
 
+        em = emf.createEntityManager();
+        /**
+         * Builder sınıfı criteria yı üretmek için kullanılır.
+         * sorgu için gerekli olan temel işlem Criteria
+         */
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        // sorguyu buradan itibaren oluşturuyoruz.
+        CriteriaQuery<User> criteriaQuery = cb.createQuery(User.class);
+        // select * from tbluser
+        Root<User> root = criteriaQuery.from(User.class); // alan adlarının ne olduğunu bildiriyoruz.
+        criteriaQuery.select(root); // select *
+        List<User> users = em.createQuery(criteriaQuery).getResultList();
 
+        users.forEach(u->{
+            System.out.println(u.getId());
+            System.out.println(u.getName());
+            System.out.println(u.getPostList());
+        });
 
     }
 }

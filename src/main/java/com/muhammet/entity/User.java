@@ -99,7 +99,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id_olacak_tamam_mi"))
     List<String> hobiler;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     List<Post> postList;
 
     @Override
