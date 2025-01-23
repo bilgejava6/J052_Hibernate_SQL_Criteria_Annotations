@@ -20,35 +20,69 @@ public class Runner {
         EntityManager em = emf.createEntityManager();
         User user = User.builder()
                 .phone("0 555 999 8887")
-                .email("muhammet@gmail.com")
-                .name("Muhammet")
+                .email("kenan@gmail.com")
+                .name("Kenan")
                 .surname("HOCA")
                 .bornDate(new Date())
                 .gender(Gender.ERKEK)
                 .hobiler(List.of("Yüzmek","Balık tutumak","Spor", "Sinama"))
                 .password("123456")
-                .userName("muhammet.hoca")
-                .build();
-
-        Post post = Post.builder()
-                .comment("Bu gün java ile  hibernate annotations  öğrenildi.")
-                .date(5L)
-                .imageUrl("")
-                .user(user)
+                .userName("kenan.hoca")
                 .build();
         em.getTransaction().begin();
-        em.persist(post);
+        em.persist(user);
         em.getTransaction().commit();
 
-        Post post1 = Post.builder()
-                .comment("hibernate  sorguları")
-                .date(10L)
-                .imageUrl("")
-                .user(user)
+
+        User user1 = User.builder()
+                .phone("0 555 999 8887")
+                .email("canan@gmail.com")
+                .name("Canan")
+                .surname("HOCA")
+                .bornDate(new Date())
+                .gender(Gender.KADIN)
+                .hobiler(List.of("Yüzmek","Balık tutumak","Spor", "Sinama"))
+                .password("123456")
+                .userName("canan.hoca")
                 .build();
         em.getTransaction().begin();
-        em.persist(post1);
+        em.persist(user1);
         em.getTransaction().commit();
+
+
+        User user2 = User.builder()
+                .phone("0 555 999 8887")
+                .email("eylem@gmail.com")
+                .name("Eylem")
+                .surname("HOCA")
+                .bornDate(new Date())
+                .gender(Gender.KADIN)
+                .hobiler(List.of("Yüzmek","Balık tutumak","Spor", "Sinama"))
+                .password("123456")
+                .userName("eylem.hoca")
+                .build();
+        em.getTransaction().begin();
+        em.persist(user2);
+        em.getTransaction().commit();
+//        Post post = Post.builder()
+//                .comment("Bu gün java ile  hibernate annotations  öğrenildi.")
+//                .date(5L)
+//                .imageUrl("")
+//                .user(user)
+//                .build();
+//        em.getTransaction().begin();
+//        em.persist(post);
+//        em.getTransaction().commit();
+
+//        Post post1 = Post.builder()
+//                .comment("hibernate  sorguları")
+//                .date(10L)
+//                .imageUrl("")
+//                .user(user)
+//                .build();
+//        em.getTransaction().begin();
+//        em.persist(post1);
+//        em.getTransaction().commit();
 
         em.close();
 

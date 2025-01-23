@@ -41,7 +41,7 @@
              olmuş ise uygula, Eğer DB de tabolar yok ise oluştur.
 -->
             <property name="hibernate.hbm2ddl.auto"
-                      value="create" />
+                      value="update" />
         </properties>
 
     </persistence-unit>
