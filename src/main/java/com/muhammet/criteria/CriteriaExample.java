@@ -4,9 +4,11 @@ import com.muhammet.entity.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.Tuple;
 import jakarta.persistence.criteria.*;
 
 import java.util.List;
+import java.util.Optional;
 
 public class CriteriaExample {
 
@@ -72,8 +74,28 @@ public class CriteriaExample {
         return em.createQuery(query).getResultList();
     }
 
+    public void usingTuple(String name){
+        CriteriaQuery<Tuple> query = cb.createQuery(Tuple.class);
+        Root<User> root = query.from(User.class); // from tbluser
+        // select id, username, password
+        Path<Long> id = root.get("id");
+        Path<String> userName = root.get("userName");
+        Path<String> password = root.get("password");
+        query.multiselect(id,userName,password); // select id, username,password
+        query.where(cb.like(root.get("name"), "%"+name+"%"));
+        List<Tuple> result = em.createQuery(query).getResultList();
+        result.forEach(u->{
+            System.out.println("id...: "+ u.get(id));
+            System.out.println("userName...: "+ u.get(1));
+            System.out.println("password...: "+ u.get(password));
+        });
+    }
 
 
+    public List<User> findAllNativeQuery(){
+        List<User> result = em.createNativeQuery("select * from user", User.class).getResultList();
+        return result;
+    }
 
 
 

@@ -10,8 +10,9 @@ public class RunnerExample {
         /**
          * List<Object[]>
          */
-        cr.findManyColumnLikeName("e").forEach(u->{
-            System.out.println(u[0]+ " - " + u[1] + " - " + u[2]);
-        });
+//        cr.findManyColumnLikeName("e").forEach(u->{
+//            System.out.println(u[0]+ " - " + u[1] + " - " + u[2]);
+//        });
+        cr.usingTuple("a");
     }
 }
